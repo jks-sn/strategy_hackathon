@@ -13,7 +13,7 @@ class Program
         var juniors = LoadEmployeesFromCsv("Juniors20.csv");
         var teamLeads = LoadEmployeesFromCsv("Teamleads20.csv");
 
-        var strategy = new HungarianOptimizedStrategy ();
+        var strategy = new HungarianGAOptimizedStrategy();
         var harmonicMeans = new List<double>();
 
         for (int run = 0; run < hackathonRuns; run++)
