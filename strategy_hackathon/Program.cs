@@ -1,13 +1,16 @@
-﻿using Nsu.HackathonProblem;
+﻿using System.Diagnostics;
+using Nsu.HackathonProblem;
 using Nsu.HackathonProblem.Contracts;
 
 namespace TeamBuildingStrategy;
 
 class Program
 {
+    public TimeSpan ExecutionTime { get; set; }
     static void Main(string[] args)
     {
         var random = new Random();
+        var stopwatch = new Stopwatch();
         const int hackathonRuns = 1000;
 
         var juniors = LoadEmployeesFromCsv("Juniors20.csv");
@@ -15,7 +18,7 @@ class Program
 
         var strategy = new HungarianGAOptimizedStrategy();
         var harmonicMeans = new List<double>();
-
+        stopwatch.Restart();
         for (int run = 0; run < hackathonRuns; run++)
         {
                 var teamLeadsWishlists = teamLeads.Select(tl =>
@@ -30,8 +33,10 @@ class Program
             Console.WriteLine($"Harmonic Mean for Run {run + 1}: {harmonicMean:F2}");
             harmonicMeans.Add(harmonicMean);
         }
-
-        Console.WriteLine($"Average Harmonic Satisfaction: {harmonicMeans.Average():F2}");
+        stopwatch.Stop();
+        var executionTime = stopwatch.Elapsed;
+        Console.WriteLine($"Average Harmonic Satisfaction: {harmonicMeans.Average():F2}\n");
+        Console.WriteLine($"Execution Time: {executionTime:hh\\:mm\\:ss}\n");
     }
 
     private static int[] GenerateRandomWishlist(int[] options, Random random)

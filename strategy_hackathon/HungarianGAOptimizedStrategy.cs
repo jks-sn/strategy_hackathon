@@ -11,9 +11,9 @@ namespace Nsu.HackathonProblem;
 
 public class HungarianGAOptimizedStrategy : ITeamBuildingStrategy
 {
-    private const int PopulationSize = 40; // размер популяции
-    private const int Generations = 30; // число поколений 
-    private const double MutationRate = 0.4; // вероятность мутации потомка
+    public int PopulationSize = 30; // размер популяции
+    public int Generations = 50; // число поколений 
+    public double MutationRate = 0.5; // вероятность мутации потомка
     private readonly Random _random = new Random();
 
     public IEnumerable<Team> BuildTeams(
